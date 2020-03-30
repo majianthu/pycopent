@@ -37,13 +37,12 @@ ce1 = copent(x)
 ```
 #### Example for copent.py
 from numpy.random import multivariate_normal as mnorm
-from copent import copent
-rho = r1 / 10
+from copent import copent ## put copent.py in your code dir
+rho = 0.6
 mean1 = [0,0]
 cov1 = [ [1,rho],[rho,1] ]
-data = mnorm(mean1,cov1, 200) # bivariate gaussian 
-copent1 = copent(data) # estimated copula entropy
-
+x = mnorm(mean1,cov1, 200) # bivariate gaussian 
+ce1 = copent(x) # estimated copula entropy
 ```
 
 #### References
