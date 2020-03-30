@@ -5,7 +5,7 @@ Copula Entropy Non-Parametric Estimation Algorithm
 #### Introduction
 Copula Entropy is a mathematical concept for statistical independence measurement [1]. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate case, which makes it universally applicable.
 
-It enjoys wide applications, include but not limit to：
+It enjoys wide applications, including but not limited to：
 
 * Structure Learning;
 
