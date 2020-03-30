@@ -7,20 +7,20 @@ Copula Entropy is a mathematical concept for statistical independence measuremen
 
 It enjoys wide applications, include but not limit to：
 
-1）Structure Learning;
+* Structure Learning;
 
-2）Variable Selection [2];
+* Variable Selection [2];
 
-3）Causality Discovery, (Estimating Transfer Entropy) [3].
+* Causality Discovery, (Estimating Transfer Entropy) [3].
 
 For more information, please refer to [1-3]. For more information in Chinese, please follow [this link](http://blog.sciencenet.cn/blog-3018268-978326.html).
 
 #### Functions
-copent -- main function;
+* copent -- main function;
 
-construct_empirical_copula -- the first step of the algorithm, which estimates empirical copula for data by rank statistics;
+* construct_empirical_copula -- the first step of the algorithm, which estimates empirical copula for data by rank statistics;
 
-entknn -- the second step of the algorithm, which estimates copula entropy from empirical copula with kNN method.
+* entknn -- the second step of the algorithm, which estimates copula entropy from empirical copula with kNN method.
 
 #### Usage Examples
 ##### R
