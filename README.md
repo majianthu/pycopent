@@ -22,6 +22,30 @@ construct_empirical_copula -- the first step of the algorithm, which estimates e
 
 entknn -- the second step of the algorithm, which estimates copula entropy from empirical copula with kNN method.
 
+#### Usage Examples
+##### R
+```
+# Example for copent.py
+library(mnormt)
+source('~/Rworks/copent.r')
+rho = 0.5
+sigma = matrix(c(1,rho,rho,1),2,2)
+x = rmnorm(500,c(0,0),sigma)
+ce1 = copent(x)
+```
+##### Python
+```
+#### Example for copent.py
+from numpy.random import multivariate_normal as mnorm
+from copent import copent
+rho = r1 / 10
+mean1 = [0,0]
+cov1 = [ [1,rho],[rho,1] ]
+data = mnorm(mean1,cov1, 200) # bivariate gaussian 
+copent1 = copent(data) # estimated copula entropy
+
+```
+
 #### References
 [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. Tsinghua Science & Technology, 2011, 16(1): 51-54. See also arXiv preprint, arXiv:0808.0845, 2008.
 
