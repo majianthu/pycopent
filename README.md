@@ -25,9 +25,9 @@ entknn -- the second step of the algorithm, which estimates copula entropy from 
 #### Usage Examples
 ##### R
 ```
-# Example for copent.py
+# Example for copent.r
 library(mnormt)
-source('~/Rworks/copent.r')
+source('~/your_dir/copent.r')
 rho = 0.5
 sigma = matrix(c(1,rho,rho,1),2,2)
 x = rmnorm(500,c(0,0),sigma)
