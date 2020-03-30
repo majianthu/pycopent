@@ -13,7 +13,7 @@ It enjoys wide applications, include but not limit to：
 
 3）Causality Discovery, (Estimating Transfer Entropy) [3].
 
-For more information, please refer to [1-2]. For more information in Chinese, please follow [this link](http://blog.sciencenet.cn/blog-3018268-978326.html).
+For more information, please refer to [1-3]. For more information in Chinese, please follow [this link](http://blog.sciencenet.cn/blog-3018268-978326.html).
 
 #### Functions
 copent -- main function;
