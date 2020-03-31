@@ -3,7 +3,7 @@ Copula Entropy Non-Parametric Estimation Algorithm
 
 
 #### Introduction
-Copula Entropy is a mathematical concept for statistical independence measurement [1]. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate case, which makes it universally applicable.
+Copula Entropy is a mathematical concept for statistical independence measurement [1]. In bivariate case, Copula Entropy is proved to be equavilent to Mutual Information. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate cases, which makes it universally applicable.
 
 It enjoys wide applications, including but not limited to：
 
@@ -11,7 +11,9 @@ It enjoys wide applications, including but not limited to：
 
 * Variable Selection [2];
 
-* Causality Discovery, (Estimating Transfer Entropy) [3].
+* Causality Discovery (Estimating Transfer Entropy) [3].
+
+This algorithm composes of two steps: estimating empirical copula density with rank statistics and estimating copula entropy from the estimated empirical copula density with kNN method. Since both steps are with non-parametric methods, the copent algorithm can be applied to any cases without making assumptions.
 
 For more information, please refer to [1-3]. For more information in Chinese, please follow [this link](http://blog.sciencenet.cn/blog-3018268-978326.html).
 
