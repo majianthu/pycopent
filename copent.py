@@ -1,14 +1,14 @@
 ##################################################################################
 ###  Estimating Copula Entropy v2.0
 ###  2019-07-03
-###  by Ma Jian (Email: majian03@gmail.com)
+###  by MA Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
 ###	x    	: N * d data, N samples, d dimensions
 ###	k    	: kth nearest neighbour, parameter for kNN entropy estimation 
 ###	dtype	: distance type [1: 'Euclidean', others: 'Maximum distance']
 ###
-###  Reference 
+###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
 ###      arXiv:0808.0845, 2008.
 ###  [2] Kraskov A, Stögbauer H, Grassberger P. Estimating mutual information. 
@@ -19,7 +19,6 @@ from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from math import gamma, log, pi
 from numpy import array, ndarray, abs, sum, sqrt, square
-from numpy.matlib import repmat
 
 ##### calculating distance matrix
 def dist(x, dtype = 1):
@@ -70,4 +69,3 @@ def copent(x, k = 3, dtype = 1):
 	xarray = array(x)
 	xc = construct_empirical_copula(xarray)
 	return -entknn(xc, k, dtype)
-
