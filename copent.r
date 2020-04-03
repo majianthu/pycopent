@@ -1,14 +1,14 @@
 ##################################################################################
 ###  Estimating Copula Entropy from data
 ###  2019-07-03
-###  by Ma Jian (Email: majian03@gmail.com)
+###  by MA Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
-###   x			: N * d data, N samples, d dimensions
-###   k 		: kth nearest neighbour, parameter for kNN entropy estimation 
-###   dm		: distance type [1: 'Euclidean', others: 'Maximum distance']
+###   x		: N * d data, N samples, d dimensions
+###   k 	: kth nearest neighbour, parameter for kNN entropy estimation 
+###   dm	: distance type [1: 'Euclidean', others: 'Maximum distance']
 ###
-###  Reference 
+###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
 ###      arXiv:0808.0845, 2008.
 ###  [2] Kraskov A, Stögbauer H, Grassberger P. Estimating mutual information. 
