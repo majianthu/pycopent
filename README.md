@@ -11,7 +11,7 @@ It enjoys wide applications, including but not limited to：
 
 * Variable Selection [2];
 
-* Causality Discovery (Estimating Transfer Entropy) [3].
+* Causal Discovery (Estimating Transfer Entropy) [3].
 
 This algorithm composes of two steps: estimating empirical copula density with rank statistics and estimating copula entropy from the estimated empirical copula density with kNN method. Since both steps are with non-parametric methods, the copent algorithm can be applied to any cases without making assumptions.
 
@@ -43,13 +43,13 @@ from copent import copent ## put copent.py in your code dir
 rho = 0.6
 mean1 = [0,0]
 cov1 = [ [1,rho],[rho,1] ]
-x = mnorm(mean1,cov1, 200) # bivariate gaussian 
+x = mnorm(mean1,cov1,200) # bivariate gaussian 
 ce1 = copent(x) # estimated copula entropy
 ```
 
 #### References
-[1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. Tsinghua Science & Technology, 2011, 16(1): 51-54. See also arXiv preprint, arXiv:0808.0845, 2008.
+1. Ma Jian, Sun Zengqi. Mutual information is copula entropy. Tsinghua Science & Technology, 2011, 16(1): 51-54. See also arXiv preprint, arXiv:0808.0845, 2008.
 
-[2] Ma Jian. Variable Selection with Copula Entropy. arXiv preprint arXiv:1910.12389, 2019.
+2. Ma Jian. Variable Selection with Copula Entropy. arXiv preprint arXiv:1910.12389, 2019.
 
-[3] Ma Jian. Estimating Transfer Entropy via Copula Entropy. arXiv preprint arXiv:1910.04375, 2019.
+3. Ma Jian. Estimating Transfer Entropy via Copula Entropy. arXiv preprint arXiv:1910.04375, 2019.
