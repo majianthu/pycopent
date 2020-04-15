@@ -6,7 +6,7 @@
 ###  Parameters
 ###   x		: N * d data, N samples, d dimensions
 ###   k 	: kth nearest neighbour, parameter for kNN entropy estimation 
-###   dm	: distance type [1: 'Euclidean', others: 'Maximum distance']
+###   dt	: distance type [1: 'Euclidean', others: 'Maximum distance']
 ###
 ###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
@@ -14,9 +14,9 @@
 ###  [2] Kraskov A, Stögbauer H, Grassberger P. Estimating mutual information. 
 ###      Physical review E, 2004, 69(6): 066138.
 ##################################################################################
-copent<-function(x,k=3,dm=2){
+copent<-function(x,k=3,dt=2){
   xc = construct_empirical_copula(x)
-  -entknn(xc,k,dm)
+  -entknn(xc,k,dt)
 }
 
 construct_empirical_copula<-function(x){
@@ -32,7 +32,7 @@ construct_empirical_copula<-function(x){
   xrank / rx
 }
 
-entknn<-function(x,k=3,dm=2){
+entknn<-function(x,k=3,dt=2){
   x = as.matrix(x)
   # get the dimension of data x
   N = dim(x)[1];
@@ -40,7 +40,7 @@ entknn<-function(x,k=3,dm=2){
   
   g1 = digamma(N) - digamma(k);
   
-  if (dm == 1){	# euciledean distance
+  if (dt == 1){	# euciledean distance
     cd = pi^(d/2) / 2^d / gamma(1+d/2);	
     distx = as.matrix(dist(x));
   }
