@@ -20,10 +20,7 @@ copent<-function(x,k=3,dm=2){
 }
 
 construct_empirical_copula<-function(x){
-  require(matlab)
-  require(Matrix)
-  
-  dimx = size(as.matrix(x));
+  dimx = dim(as.matrix(x));
   rx = dimx[1];
   lx = dimx[2];
   
@@ -36,9 +33,6 @@ construct_empirical_copula<-function(x){
 }
 
 entknn<-function(x,k=3,dm=2){
-  require(Matrix)
-  require(matlab)
-  
   x = as.matrix(x)
   # get the dimension of data x
   N = dim(x)[1];
