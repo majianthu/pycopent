@@ -25,17 +25,6 @@ For more information, please refer to [1-3]. For more information in Chinese, pl
 * entknn -- the second step of the algorithm, which estimates copula entropy from empirical copula with kNN method.
 
 #### Usage Examples
-##### R
-```
-# Example for copent.r
-library(mnormt)
-source('~/your_dir/copent.r')
-rho = 0.5
-sigma = matrix(c(1,rho,rho,1),2,2)
-x = rmnorm(500,c(0,0),sigma)
-ce1 = copent(x)
-```
-##### Python
 ```
 #### Example for copent.py
 from numpy.random import multivariate_normal as mnorm
