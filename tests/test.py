@@ -1,7 +1,5 @@
 from numpy.random import multivariate_normal as mnorm
-from numpy import corrcoef
 from math import log 
-import numpy as np
 import copent
 
 rho = 0.8
