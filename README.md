@@ -19,11 +19,10 @@ pip install copent
 ```
 The package can be installed from Github:
 ```
-pip install git+https://github.com/majianthu/copent.git
+pip install git+https://github.com/majianthu/pycopent.git
 ```
-#### Usage Examples
+#### Usage Example
 ```
-#### Example for copent.py
 from numpy.random import multivariate_normal as mnorm
 import copent
 rho = 0.6
