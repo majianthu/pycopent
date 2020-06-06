@@ -1,6 +1,6 @@
+[![PyPI](https://img.shields.io/pypi/v/copent)](https://pypi.org/project/copent)
 # copent
 Estimating Copula Entropy Non-parametrically in Python
-
 
 #### Introduction
 The nonparametric method for estimating copula entropy is implemented. The method composes of two simple steps: estimating empirical copula by rank statistic and estimating copula entropy with k-Nearest-Neighbour method. Copula Entropy is a mathematical concept for multivariate statistical independence measuring and testing, and proved to be equivalent to mutual information. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate cases, which makes it universally applicable. Estimating copula entropy can be applied to many cases, including but not limited to variable selection [2] and causal discovery (by estimating transfer entropy) [3]. Please refer to Ma and Sun (2011) <doi:10.1016/S1007-0214(11)70008-6> for more information. For more information in Chinese, please follow [this link](http://blog.sciencenet.cn/blog-3018268-978326.html).
