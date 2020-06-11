@@ -1,4 +1,4 @@
-[![PyPI](https://img.shields.io/pypi/v/copent)](https://pypi.org/project/copent)
+[![PyPI version](https://badge.fury.io/py/copent.svg)](https://pypi.org/project/copent)
 # copent
 Estimating Copula Entropy Non-parametrically in Python
 
