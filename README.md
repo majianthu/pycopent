@@ -11,13 +11,9 @@ The nonparametric method for estimating transfer entropy composes of two steps: 
 
 #### Functions
 * copent -- estimating copula entropy;
-
 * construct_empirical_copula -- the first step of the copent function, which estimates empirical copula for data by rank statistics;
-
 * entknn -- the second step of the copent function, which estimates copula entropy from empirical copula with kNN method;
-
 * ci -- conditional independence testing based on copula entropy 
-
 * transent -- estimating transfer entropy via copula entropy
 
 #### Installation
@@ -59,7 +55,5 @@ for lag in range(1,25):
 
 #### References
 1. Ma Jian, Sun Zengqi. Mutual information is copula entropy. Tsinghua Science & Technology, 2011, 16(1): 51-54. See also arXiv preprint, arXiv:0808.0845, 2008.
-
 2. Ma Jian. Variable Selection with Copula Entropy. arXiv preprint arXiv:1910.12389, 2019.
-
 3. Ma Jian. Estimating Transfer Entropy via Copula Entropy. arXiv preprint arXiv:1910.04375, 2019.
