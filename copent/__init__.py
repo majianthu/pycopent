@@ -1,1 +1,1 @@
-from copent.copent import copent,entknn,construct_empirical_copula
+from copent.copent import copent,entknn,construct_empirical_copula,ci,transent
