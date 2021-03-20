@@ -7,7 +7,7 @@
 ###	x    	: N * d data, N samples, d dimensions
 ###	k    	: kth nearest neighbour, parameter for kNN entropy estimation 
 ###	dtype	: distance type [1: 'Euclidean', others: 'Maximum distance']
-### lag		: time lag
+###	lag	: time lag
 ###
 ###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
