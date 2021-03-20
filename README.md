@@ -7,7 +7,7 @@ The nonparametric methods for estimating copula entropy and transfer entropy are
 
 The method for estimating copula entropy composes of two simple steps: estimating empirical copula by rank statistic and estimating copula entropy with k-Nearest-Neighbour method. Copula Entropy is a mathematical concept for multivariate statistical independence measuring and testing, and proved to be equivalent to mutual information. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate cases, which makes it universally applicable. Estimating copula entropy can be applied to many cases, including but not limited to variable selection [2] and causal discovery (by estimating transfer entropy) [3]. Please refer to Ma and Sun (2011) [doi:10.1016/S1007-0214(11)70008-6](http://www.doi.org/10.1016/S1007-0214(11)70008-6) for more information. For more information in Chinese, please follow [this link](http://blog.sciencenet.cn/blog-3018268-978326.html).
 
-The nonparametric method for estimating transfer entropy composes of two steps: estimating three copula entropy and calculating transfer entropy from the estimated copula entropy. A function for conditional independence testing is also provided. Please refer to Ma (2019) [(arXiv:1910.04375)](https://arxiv.org/abs/1910.04375) for more information.
+The nonparametric method for estimating transfer entropy composes of two steps: estimating three copula entropy and calculating transfer entropy from the estimated copula entropy. A function for conditional independence testing is also provided. Please refer to Ma (2019) <[arXiv:1910.04375](https://arxiv.org/abs/1910.04375)> for more information.
 
 #### Functions
 * copent -- estimating copula entropy;
