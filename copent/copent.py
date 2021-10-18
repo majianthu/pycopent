@@ -70,7 +70,7 @@ def entknn(x, k = 3, dtype = 2):
 	return (g1 + log(cd) + logd)
 
 ##### 2-step Nonparametric estimation of copula entropy [1]
-def copent(x, k = 3, dtype = 2):
+def copent(x, k = 3, dtype = 2, log0 = False):
 	xarray = array(x)
 
 	if log0:
