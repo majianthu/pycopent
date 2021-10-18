@@ -8,7 +8,7 @@
 ###	k    	: kth nearest neighbour, parameter for kNN entropy estimation 
 ###	dtype	: distance type [1: 'Euclidean', others: 'Maximum distance']
 ###	lag	: time lag
-###	log0  : for log0 error
+###	log0 	: for log0 error
 ###
 ###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
