@@ -1,6 +1,6 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2021-03-20
+###  2021-10-18
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
@@ -8,6 +8,7 @@
 ###	k    	: kth nearest neighbour, parameter for kNN entropy estimation 
 ###	dtype	: distance type [1: 'Euclidean', others: 'Maximum distance']
 ###	lag	: time lag
+###	log0  : for log0 error
 ###
 ###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
@@ -21,7 +22,8 @@
 from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from math import gamma, log, pi
-from numpy import array, ndarray, abs, sum, sqrt, square, vstack
+from numpy import array, ndarray, abs, max, sum, sqrt, square, vstack
+from numpy.random import normal as rnorm
 
 ##### calculating distance matrix
 def dist(x, dtype = 2):
@@ -70,8 +72,22 @@ def entknn(x, k = 3, dtype = 2):
 ##### 2-step Nonparametric estimation of copula entropy [1]
 def copent(x, k = 3, dtype = 2):
 	xarray = array(x)
+
+	if log0:
+		(N,d) = xarray.shape
+		max1 = max(abs(xarray), axis = 0)
+		for i in range(0,d):
+			if max1[i] == 0:
+				xarray[:,i] = rnorm(0,1,N)
+			else:
+				xarray[:,i] = xarray[:,i] + rnorm(0,1,N) * max1[i] * 0.000005
+
 	xc = construct_empirical_copula(xarray)
-	return -entknn(xc, k, dtype)
+
+	try:
+		return -entknn(xc, k, dtype)
+	except ValueError: # log0 error
+		return copent(x, k, dtype, log0 = True)
 
 ##### conditional independence test [3]
 ##### to test independence of (x,y) conditioned on z
