@@ -22,7 +22,7 @@
 from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from math import gamma, log, pi
-from numpy import array, ndarray, abs, max, sum, sqrt, square, vstack
+from numpy import array, ndarray, abs, max, sum, sqrt, square, vstack, zeros
 from numpy.random import normal as rnorm
 
 ##### calculating distance matrix
@@ -44,7 +44,7 @@ def dist(x, dtype = 2):
 ##### constructing empirical copula density [1]
 def construct_empirical_copula(x):
 	(N,d) = x.shape	
-	xc = x 
+	xc = zeros([N,d])
 	for i in range(0,d):
 		xc[:,i] = rank(x[:,i]) / N
 	
