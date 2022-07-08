@@ -34,7 +34,7 @@ pip install git+https://github.com/majianthu/pycopent.git
 ```
 #### Usage Examples
 ##### estimating copula entropy 
-```
+```python
 from numpy.random import multivariate_normal as mnorm
 import copent
 rho = 0.6
@@ -45,7 +45,7 @@ ce1 = copent.copent(x) # estimated copula entropy
 ```
 
 ##### estimating transfer entropy 
-```
+```python
 from copent import transent
 from pandas import read_csv
 import numpy as np
