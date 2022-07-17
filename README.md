@@ -3,11 +3,13 @@
 Estimating Copula Entropy and Transfer Entropy
 
 #### Introduction
-The nonparametric methods for estimating copula entropy and transfer entropy are implemented. 
+The nonparametric methods for estimating copula entropy, transfer entropy, and the statistic for multivariate normality test are implemented. 
 
 The method for estimating copula entropy composes of two simple steps: estimating empirical copula by rank statistic and estimating copula entropy with the KSG method. Copula Entropy is a mathematical concept for multivariate statistical independence measuring and testing, and proved to be equivalent to mutual information. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate cases, which makes it universally applicable. Estimating copula entropy can be applied to many cases, including but not limited to variable selection and causal discovery (by estimating transfer entropy). Please refer to Ma and Sun (2011) <[doi:10.1016/S1007-0214(11)70008-6](http://www.doi.org/10.1016/S1007-0214(11)70008-6)> for more information.
 
-The nonparametric method for estimating transfer entropy composes of two steps: estimating three copula entropy and calculating transfer entropy from the estimated copula entropy. A function for conditional independence testing is also provided. Please refer to Ma (2019) <[arXiv:1910.04375](https://arxiv.org/abs/1910.04375)> for more information.
+The nonparametric method for estimating transfer entropy composes of two steps: estimating three copula entropy and calculating transfer entropy from the estimated copula entropies. A function for conditional independence testing is also provided. Please refer to Ma (2019) <[arXiv:1910.04375](https://arxiv.org/abs/1910.04375)> for more information.
+
+The copula entropy based statistic for multivariate normality test is implemented. Please refer to Ma (2022) <[arXiv:2206.05956](https://arxiv.org/abs/2206.05956)> for more details.
 
 #### Functions
 * copent -- estimating copula entropy;
@@ -15,6 +17,7 @@ The nonparametric method for estimating transfer entropy composes of two steps: 
 * entknn -- the second step of the copent function, which estimates copula entropy from empirical copula with kNN method;
 * ci -- conditional independence testing based on copula entropy 
 * transent -- estimating transfer entropy via copula entropy
+* mvnt -- the copula entropy-based statistic for multivariate normality test
 
 #### Parameters
 * x: N * d data, N samples, d dimensions;
@@ -60,6 +63,19 @@ for lag in range(1,25):
 	print(str)
 ```
 
+##### multivariate normality test
+```python
+import numpy as np
+from numpy.random import multivariate_normal as mnorm
+from copent import mvnt
+mean1 = [0,0]
+cov1 = [[1,0.65],[0.65,1]]
+data = mnorm(mean1, cov1, 500) # bivariate gaussian 
+stat1 = mvnt(data)
+```
+
 #### References
 1. Jian Ma and Zengqi Sun. Mutual information is copula entropy. Tsinghua Science & Technology, 2011, 16(1): 51-54. See also arXiv preprint arXiv:0808.0845, 2008.
 2. Jian Ma. Estimating Transfer Entropy via Copula Entropy. arXiv preprint arXiv:1910.04375, 2019.
+3. Jian Ma. Multivariate Normality Test with Copula Entropy. arXiv preprint arXiv:2206.05956, 2022.
+
