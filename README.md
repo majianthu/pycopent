@@ -65,7 +65,6 @@ for lag in range(1,25):
 
 ##### multivariate normality test
 ```python
-import numpy as np
 from numpy.random import multivariate_normal as mnorm
 from copent import mvnt
 mean1 = [0,0]
