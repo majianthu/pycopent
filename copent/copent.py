@@ -1,13 +1,13 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2022-01-25
+###  2022-07-17
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
 ###	x    	: N * d data, N samples, d dimensions
 ###	k    	: kth nearest neighbour, parameter for kNN entropy estimation. default = 3
 ###	dtype	: distance type [1: 'Euclidean', 2/others (default): 'Maximum distance']
-###	mode	: running mode, 1(default): for speed/small data, 2: for space/large data
+###	mode	: running mode [1(default): for speed/small data, 2: for space/large data]
 ###	lag	: time lag. default = 1
 ###
 ###  References
@@ -16,14 +16,17 @@
 ###  [2] Kraskov A, Stögbauer H, Grassberger P. Estimating mutual information. 
 ###      Physical review E, 2004, 69(6): 066138.
 ###  [3] Ma, Jian. Estimating Transfer Entropy via Copula Entropy. 
-###      arXiv preprint arXiv:1910.04375 (2019).
+###      arXiv preprint arXiv:1910.04375, 2019.
+###  [4] Ma, Jian. Multivariate Normality Test with Copula Entropy.
+###      arXiv preprint arXiv:2206.05956, 2022.
 ##################################################################################
 
 from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from math import gamma, log, pi
-from numpy import array, ndarray, abs, max, sum, sqrt, square, vstack, zeros
+from numpy import array, ndarray, abs, max, sum, sqrt, square, vstack, zeros, cov
 from numpy.random import normal as rnorm
+from numpy.linalg import det
 
 ##### calculating distance matrix
 def dist(x, dtype = 2):
@@ -126,3 +129,8 @@ def transent(x, y, lag = 1, k = 3, dtype = 2, mode = 1):
 	x2 = x[lag:l]
 	y = y[0:(l-lag)]
 	return ci(x2,y,x1,k,dtype,mode)
+
+##### multivariate normality test [4]
+def mvnt(x, k = 3, dtype = 2, mode = 1):
+	return -0.5 * log(det(cov(x.T))) - copent(x,k,dtype,mode)
+
