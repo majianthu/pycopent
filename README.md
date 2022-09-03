@@ -24,7 +24,6 @@ The copula entropy based statistic for multivariate normality test is implemente
 * k: kth nearest neighbour, parameter for kNN entropy estimation. default = 3;
 * dtype: distance type, can be 'euclidean' or 'chebychev' (for Maximum Distance);
 * lag: time lag. default = 1;
-* mode: running mode, 1(default) for speed/small data, 2 for space/large data.
 
 #### Installation
 The package can be installed from PyPI directly:
