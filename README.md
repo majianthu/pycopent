@@ -22,7 +22,7 @@ The copula entropy based statistic for multivariate normality test is implemente
 #### Parameters
 * x: N * d data, N samples, d dimensions;
 * k: kth nearest neighbour, parameter for kNN entropy estimation. default = 3;
-* dtype: distance type, 1 for 'Euclidean', 2/others (default) for 'Maximum distance';
+* dtype: distance type, can be 'euclidean' or 'chebychev' (for Maximum Distance);
 * lag: time lag. default = 1;
 * mode: running mode, 1(default) for speed/small data, 2 for space/large data.
 
