@@ -24,32 +24,10 @@ from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from scipy.spatial.distance import cdist
 from math import gamma, log, pi
-from numpy import array, ndarray, abs, max, sum, sqrt, square, vstack, zeros, cov
+from numpy import array, abs, max, vstack, zeros, cov
 from numpy.random import normal as rnorm
 from numpy.linalg import det
 import numpy as np
-
-##### calculating distance matrix
-def dist(x, dtype = 2):
-	(N,d) = x.shape
-	xd = ndarray(shape = (N,N), dtype = float)
-	
-	for i in range(0,N):
-		for j in range(i,N):
-			if dtype == 1:
-				xd[i,j] = sqrt(sum(square(x[i,:]-x[j,:])))
-				xd[j,i] = xd[i,j]
-			else: ## dtype = 2
-				xd[i,j] = max(abs(x[i,:]-x[j,:]))
-				xd[j,i] = xd[i,j]
-	
-	return xd
-##### calculating the distance between two samples
-def dist_ij(xi,xj, dtype = 2):
-	if dtype == 1:
-		return sqrt(sum(square(xi-xj)))
-	else: ## dtype = 2
-		return max(abs(xi-xj))
 
 ##### constructing empirical copula density [1]
 def construct_empirical_copula(x):
