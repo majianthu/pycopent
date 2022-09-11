@@ -39,7 +39,7 @@ def construct_empirical_copula(x):
 	return xc
 
 ##### Estimating entropy with kNN method [2]
-def entknn(x, k = 3, dtype = 'euclidean'):
+def entknn(x, k = 3, dtype = 'chebychev'):
 	(N,d) = x.shape
 	
 	g1 = digamma(N) - digamma(k)
@@ -79,14 +79,14 @@ def copent(x, k = 3, dtype = 'chebychev', log0 = False):
 
 ##### conditional independence test [3]
 ##### to test independence of (x,y) conditioned on z
-def ci(x, y, z, k = 3, dtype = 2):
+def ci(x, y, z, k = 3, dtype = 'chebychev'):
 	xyz = vstack((x,y,z)).T
 	yz = vstack((y,z)).T
 	xz = vstack((x,z)).T
 	return copent(xyz,k,dtype) - copent(yz,k,dtype) - copent(xz,k,dtype)
 
 ##### estimating transfer entropy from y to x with lag [3]
-def transent(x, y, lag = 1, k = 3, dtype = 'euclidean'):
+def transent(x, y, lag = 1, k = 3, dtype = 'chebychev'):
 	xlen = len(x)
 	ylen = len(y)
 	if (xlen > ylen):
@@ -101,5 +101,5 @@ def transent(x, y, lag = 1, k = 3, dtype = 'euclidean'):
 	return ci(x2,y,x1,k,dtype)
 
 ##### multivariate normality test [4]
-def mvnt(x, k = 3, dtype = 'euclidean'):
+def mvnt(x, k = 3, dtype = 'chebychev'):
 	return -0.5 * log(det(cov(x.T))) - copent(x,k,dtype)
