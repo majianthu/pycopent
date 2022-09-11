@@ -27,7 +27,6 @@ from math import gamma, log, pi
 from numpy import array, abs, max, vstack, zeros, cov
 from numpy.random import normal as rnorm
 from numpy.linalg import det
-import numpy as np
 
 ##### constructing empirical copula density [1]
 def construct_empirical_copula(x):
@@ -52,7 +51,8 @@ def entknn(x, k = 3, dtype = 'chebychev'):
 	logd = 0
 	dists = cdist(x, x, dtype)
 	dists.sort()
-	logd = np.cumsum(np.log(dists[:, k] * 2) * d / N)[-1]
+	for i in range(0,N):
+		logd = logd + log( 2 * dists[i,k] ) * d / N
 
 	return (g1 + log(cd) + logd)
 
