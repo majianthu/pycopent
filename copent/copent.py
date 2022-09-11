@@ -1,6 +1,6 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2022-07-17
+###  2022-09-11
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
