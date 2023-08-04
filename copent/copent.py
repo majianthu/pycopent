@@ -1,6 +1,6 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2022-09-11
+###  2023-08-05
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
@@ -8,6 +8,8 @@
 ###	k    	: kth nearest neighbour, parameter for kNN entropy estimation. default = 3
 ###	dtype	: distance type ['euclidean', 'chebychev' (i.e Maximum distance)]
 ###	lag	: time lag. default = 1
+###	s0,s1	: two samples with same dimension
+###	n	: repeat time of estimation. default = 12
 ###
 ###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
@@ -18,14 +20,16 @@
 ###      arXiv preprint arXiv:1910.04375, 2019.
 ###  [4] Ma, Jian. Multivariate Normality Test with Copula Entropy.
 ###      arXiv preprint arXiv:2206.05956, 2022.
+###  [5] Ma, Jian. Two-Sample Test with Copula Entropy.
+###      arXiv preprint arXiv:2307.07247, 2023.
 ##################################################################################
 
 from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from scipy.spatial.distance import cdist
 from math import gamma, log, pi
-from numpy import array, abs, max, vstack, zeros, cov
-from numpy.random import normal as rnorm
+from numpy import array, abs, max, hstack, vstack, ones, zeros, cov
+from numpy.random import uniform, normal as rnorm
 from numpy.linalg import det
 
 ##### constructing empirical copula density [1]
@@ -103,3 +107,16 @@ def transent(x, y, lag = 1, k = 3, dtype = 'chebychev'):
 ##### multivariate normality test [4]
 def mvnt(x, k = 3, dtype = 'chebychev'):
 	return -0.5 * log(det(cov(x.T))) - copent(x,k,dtype)
+
+##### two-sample test [5]
+def tst(s0,s1,n=12):
+	(N0,d0) = s0.shape
+	(N1,d1) = s1.shape
+	x = vstack((s0,s1))
+	stat1 = 0
+	for i in range(0,n):
+		y1 = vstack((ones([N0,1]),ones([N1,1])*2)) + uniform(0, 0.0000001,[N0+N1,1])
+		y0 = ones([N0+N1,1]) + uniform(0,0.0000001,[N0+N1,1])
+		stat1 = stat1 + copent(hstack((x,y1))) - copent(hstack((x,y0)))
+	return stat1/n
+
