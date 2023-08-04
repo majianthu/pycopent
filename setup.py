@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="copent",
-    version="0.3.2",
+    version="0.4",
     author="MA Jian",
     author_email="majian03@gmail.com",
     description="Estimating Copula Entropy and Transfer Entropy",

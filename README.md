@@ -3,13 +3,13 @@
 Estimating Copula Entropy and Transfer Entropy
 
 #### Introduction
-The nonparametric methods for estimating copula entropy, transfer entropy, and the statistic for multivariate normality test are implemented. 
+The nonparametric methods for estimating copula entropy, transfer entropy, and the statistics for multivariate normality test and two-sample test are implemented. 
 
 The method for estimating copula entropy composes of two simple steps: estimating empirical copula by rank statistic and estimating copula entropy with the KSG method. Copula Entropy is a mathematical concept for multivariate statistical independence measuring and testing, and proved to be equivalent to mutual information. Different from Pearson Correlation Coefficient, Copula Entropy is defined for non-linear, high-order and multivariate cases, which makes it universally applicable. Estimating copula entropy can be applied to many cases, including but not limited to variable selection and causal discovery (by estimating transfer entropy). Please refer to Ma and Sun (2011) <[doi:10.1016/S1007-0214(11)70008-6](http://www.doi.org/10.1016/S1007-0214(11)70008-6)> for more information.
 
 The nonparametric method for estimating transfer entropy composes of two steps: estimating three copula entropy and calculating transfer entropy from the estimated copula entropies. A function for conditional independence testing is also provided. Please refer to Ma (2019) <[arXiv:1910.04375](https://arxiv.org/abs/1910.04375)> for more information.
 
-The copula entropy based statistic for multivariate normality test is implemented. Please refer to Ma (2022) <[arXiv:2206.05956](https://arxiv.org/abs/2206.05956)> for more details.
+The copula entropy based statistics for multivariate normality test and two-sample test are implemented. Please refer to Ma (2022) <[arXiv:2206.05956](https://arxiv.org/abs/2206.05956)> and Ma (2023) <[arXiv:2307.07247](https://arxiv.org/abs/2307.07247)> for more details.
 
 #### Functions
 * copent -- estimating copula entropy;
@@ -17,13 +17,16 @@ The copula entropy based statistic for multivariate normality test is implemente
 * entknn -- the second step of the copent function, which estimates copula entropy from empirical copula with kNN method;
 * ci -- conditional independence testing based on copula entropy 
 * transent -- estimating transfer entropy via copula entropy
-* mvnt -- the copula entropy-based statistic for multivariate normality test
+* mvnt -- estimating the copula entropy-based statistic for multivariate normality test
+* tst -- estimating the copula entropy-based statistic for two-sample test
 
 #### Parameters
-* x: N * d data, N samples, d dimensions;
-* k: kth nearest neighbour, parameter for kNN entropy estimation. default = 3;
-* dtype: distance type, can be 'euclidean' or 'chebychev' (for Maximum Distance);
-* lag: time lag. default = 1;
+* x: N * d data, N samples, d dimensions
+* k: kth nearest neighbour, parameter for kNN entropy estimation. default = 3
+* dtype: distance type, can be 'euclidean' or 'chebychev' (for Maximum Distance)
+* lag: time lag. default = 1
+* s0,s1: two samples with same dimension
+* n: repeat time of estimation
 
 #### Installation
 The package can be installed from PyPI directly:
@@ -68,12 +71,30 @@ from numpy.random import multivariate_normal as mnorm
 from copent import mvnt
 mean1 = [0,0]
 cov1 = [[1,0.65],[0.65,1]]
-data = mnorm(mean1, cov1, 500) # bivariate gaussian 
+data = mnorm(mean1, cov1, 500)
 stat1 = mvnt(data)
+```
+
+##### two-sample test
+```python
+from copent import tst
+from numpy import zeros
+from numpy.random import multivariate_normal as mnorm
+m0 = [0,0]
+rho1 = 0.5
+v0 = [[1,rho1],[rho1,1]]
+s0 = mnorm(m0, v0, 500) # bivariate gaussian 
+stat1 = zeros(9)
+for i in range(0,9):
+	m1 = [i,i]
+	s1 = mnorm(m1,v0,500)
+	stat1[i] = tst(s0,s1)
+	print(stat1[i])
 ```
 
 #### References
 1. Jian Ma and Zengqi Sun. Mutual information is copula entropy. Tsinghua Science & Technology, 2011, 16(1): 51-54. See also arXiv preprint arXiv:0808.0845, 2008.
 2. Jian Ma. Estimating Transfer Entropy via Copula Entropy. arXiv preprint arXiv:1910.04375, 2019.
 3. Jian Ma. Multivariate Normality Test with Copula Entropy. arXiv preprint arXiv:2206.05956, 2022.
+4. Jian Ma. Two-Sample Test with Copula Entropy. arXiv preprint arXiv:2307.07247, 2023.
 
