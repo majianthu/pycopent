@@ -109,7 +109,7 @@ def mvnt(x, k = 3, dtype = 'chebychev'):
 	return -0.5 * log(det(cov(x.T))) - copent(x,k,dtype)
 
 ##### two-sample test [5]
-def tst(s0,s1,n=12):
+def tst(s0, s1, n=12, k = 3, dtype = 'chebychev'):
 	(N0,d0) = s0.shape
 	(N1,d1) = s1.shape
 	x = vstack((s0,s1))
@@ -117,6 +117,6 @@ def tst(s0,s1,n=12):
 	for i in range(0,n):
 		y1 = vstack((ones([N0,1]),ones([N1,1])*2)) + uniform(0, 0.0000001,[N0+N1,1])
 		y0 = ones([N0+N1,1]) + uniform(0,0.0000001,[N0+N1,1])
-		stat1 = stat1 + copent(hstack((x,y1))) - copent(hstack((x,y0)))
+		stat1 = stat1 + copent(hstack((x,y1)),k,dtype) - copent(hstack((x,y0)),k,dtype)
 	return stat1/n
 
