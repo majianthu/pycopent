@@ -1,6 +1,6 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2023-08-05
+###  2024-02-12
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
@@ -10,6 +10,9 @@
 ###	lag	: time lag. default = 1
 ###	s0,s1	: two samples with same dimension
 ###	n	: repeat time of estimation. default = 12
+###	thd	: threshold for the statistic of two-sample test
+###	maxp	: maximal number of change points
+###	minseglen : minimal length of binary segmentation
 ###
 ###  References
 ###  [1] Ma Jian, Sun Zengqi. Mutual information is copula entropy. 
@@ -22,13 +25,15 @@
 ###      arXiv preprint arXiv:2206.05956, 2022.
 ###  [5] Ma, Jian. Two-Sample Test with Copula Entropy.
 ###      arXiv preprint arXiv:2307.07247, 2023.
+###  [6] Ma, Jian. Change Point Detection with Copula Entropy based Two-Sample Test
+###      DOI:10.13140/RG.2.2.16378.26562, 2024.
 ##################################################################################
 
 from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from scipy.spatial.distance import cdist
 from math import gamma, log, pi
-from numpy import array, abs, max, hstack, vstack, ones, zeros, cov
+from numpy import array, abs, max, hstack, vstack, ones, zeros, cov, mat, where
 from numpy.random import uniform, normal as rnorm
 from numpy.linalg import det
 
@@ -109,7 +114,7 @@ def mvnt(x, k = 3, dtype = 'chebychev'):
 	return -0.5 * log(det(cov(x.T))) - copent(x,k,dtype)
 
 ##### two-sample test [5]
-def tst(s0, s1, n=12, k = 3, dtype = 'chebychev'):
+def tst(s0,s1,n=12, k = 3, dtype = 'chebychev'):
 	(N0,d0) = s0.shape
 	(N1,d1) = s1.shape
 	x = vstack((s0,s1))
@@ -119,4 +124,47 @@ def tst(s0, s1, n=12, k = 3, dtype = 'chebychev'):
 		y0 = ones([N0+N1,1]) + uniform(0,0.0000001,[N0+N1,1])
 		stat1 = stat1 + copent(hstack((x,y1)),k,dtype) - copent(hstack((x,y0)),k,dtype)
 	return stat1/n
+
+##### single change point detection
+def cpd(x, thd = 0.13, n = 30):
+	x = mat(x)
+	len1 = x.shape[0]
+	if len1 == 1:
+		len1 = x.shape[1]
+		x = x.T
+	pos = -1
+	maxstat = 0
+	stat1 = zeros(len1)
+	for i in range(1,len1-1):
+		s0 = x[0:i,:]
+		s1 = x[(i+1):,:]
+		stat1[i] = tst(s0,s1,n)
+	if(max(stat1) > thd):
+		maxstat = max(stat1)
+		pos = where(stat1 == maxstat)[0][0]+1
+	return pos, maxstat, stat1
+
+##### multiple change point detection
+def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30):
+	x = mat(x)
+	len1 = x.shape[0]
+	if len1 == 1:
+		len1 = x.shape[1]
+		x = x.T
+	maxstat = []
+	pos = []
+	bisegs = mat([0,len1-1])
+	for i in range(0,maxp):
+		if i > bisegs.shape[0]:
+			break
+		rpos, rmaxstat, _ = cpd(x[bisegs[i,0]:bisegs[i,1],:],thd,n)
+		if rpos > -1 :
+			rpos = rpos + bisegs[i,0]
+			maxstat.append(rmaxstat)
+			pos.append(rpos)
+			if (rpos - bisegs[i,0]) > minseglen :
+				bisegs = vstack((bisegs,[bisegs[i,0],rpos-1]))
+			if (bisegs[i,1] - rpos +1) > minseglen :
+				bisegs = vstack((bisegs,[rpos,bisegs[i,1]]))
+	return pos,maxstat
 
