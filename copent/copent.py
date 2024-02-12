@@ -125,7 +125,7 @@ def tst(s0,s1,n=12, k = 3, dtype = 'chebychev'):
 		stat1 = stat1 + copent(hstack((x,y1)),k,dtype) - copent(hstack((x,y0)),k,dtype)
 	return stat1/n
 
-##### single change point detection
+##### single change point detection [6]
 def cpd(x, thd = 0.13, n = 30):
 	x = mat(x)
 	len1 = x.shape[0]
@@ -144,7 +144,7 @@ def cpd(x, thd = 0.13, n = 30):
 		pos = where(stat1 == maxstat)[0][0]+1
 	return pos, maxstat, stat1
 
-##### multiple change point detection
+##### multiple change point detection [6]
 def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30):
 	x = mat(x)
 	len1 = x.shape[0]
@@ -155,7 +155,7 @@ def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30):
 	pos = []
 	bisegs = mat([0,len1-1])
 	for i in range(0,maxp):
-		if i > bisegs.shape[0]:
+		if i >= bisegs.shape[0]:
 			break
 		rpos, rmaxstat, _ = cpd(x[bisegs[i,0]:bisegs[i,1],:],thd,n)
 		if rpos > -1 :
