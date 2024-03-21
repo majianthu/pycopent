@@ -126,5 +126,5 @@ print(pos)
 2. Jian Ma. Estimating Transfer Entropy via Copula Entropy. arXiv preprint arXiv:1910.04375, 2019.
 3. Jian Ma. Multivariate Normality Test with Copula Entropy. arXiv preprint arXiv:2206.05956, 2022.
 4. Jian Ma. Two-Sample Test with Copula Entropy. arXiv preprint arXiv:2307.07247, 2023.
-5. Jian Ma. Change Point Detection with Copula Entropy based Two-Sample Test. DOI:10.13140/RG.2.2.16378.26562, 2024.
+5. Jian Ma. Change Point Detection with Copula Entropy based Two-Sample Test. arXiv preprint arXiv:2403.07892, 2024.
 
