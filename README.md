@@ -9,7 +9,7 @@ The method for estimating copula entropy composes of two simple steps: estimatin
 
 The nonparametric method for estimating transfer entropy composes of two steps: estimating three copula entropy and calculating transfer entropy from the estimated copula entropies. A function for conditional independence testing is also provided. Please refer to Ma (2019) <[arXiv:1910.04375](https://arxiv.org/abs/1910.04375)> for more information.
 
-The copula entropy based statistics for multivariate normality test and two-sample test are implemented. The change point detection method based on this two-sample test is also implemented. Please refer to Ma (2022) <[arXiv:2206.05956](https://arxiv.org/abs/2206.05956)>, Ma (2023) <[arXiv:2307.07247](https://arxiv.org/abs/2307.07247)>, and Ma (2024) <[doi:10.13140/RG.2.2.16378.26562](https://doi.org/10.13140/RG.2.2.16378.26562)> for more details. 
+The copula entropy based statistics for multivariate normality test and two-sample test are implemented. The change point detection method based on this two-sample test is also implemented. Please refer to Ma (2022) <[arXiv:2206.05956](https://arxiv.org/abs/2206.05956)>, Ma (2023) <[arXiv:2307.07247](https://arxiv.org/abs/2307.07247)>, and Ma (2024) <[arXiv:2403.07892](https://arxiv.org/abs/2403.07892)> for more details. 
 
 #### Functions
 * copent -- estimating copula entropy;
