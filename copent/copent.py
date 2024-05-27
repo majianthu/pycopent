@@ -1,6 +1,6 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2024-02-12
+###  2024-05-28
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
@@ -25,8 +25,8 @@
 ###      arXiv preprint arXiv:2206.05956, 2022.
 ###  [5] Ma, Jian. Two-Sample Test with Copula Entropy.
 ###      arXiv preprint arXiv:2307.07247, 2023.
-###  [6] Ma, Jian. Change Point Detection with Copula Entropy based Two-Sample Test
-###      DOI:10.13140/RG.2.2.16378.26562, 2024.
+###  [6] Ma, Jian. Change Point Detection with Copula Entropy based Two-Sample Test.
+###      arXiv preprint arXiv:2403.07892, 2024.
 ##################################################################################
 
 from scipy.special import digamma
@@ -36,6 +36,7 @@ from math import gamma, log, pi
 from numpy import array, abs, max, hstack, vstack, ones, zeros, cov, mat, where
 from numpy.random import uniform, normal as rnorm
 from numpy.linalg import det
+from multiprocessing import Pool
 
 ##### constructing empirical copula density [1]
 def construct_empirical_copula(x):
@@ -126,6 +127,16 @@ def tst(s0,s1,n=12, k = 3, dtype = 'chebychev'):
 	return stat1/n
 
 ##### single change point detection [6]
+def init_x_n(X,N):
+	global x,n
+	x = X
+	n = N
+
+def tsti(i):
+	s0 = x[0:(i+1),:]
+	s1 = x[(i+2):,:]
+	return tst(s0,s1,n)
+	
 def cpd(x, thd = 0.13, n = 30):
 	x = mat(x)
 	len1 = x.shape[0]
@@ -134,11 +145,8 @@ def cpd(x, thd = 0.13, n = 30):
 		x = x.T
 	pos = -1
 	maxstat = 0
-	stat1 = zeros(len1)
-	for i in range(1,len1-1):
-		s0 = x[0:i,:]
-		s1 = x[(i+1):,:]
-		stat1[i] = tst(s0,s1,n)
+	pool = Pool(initializer = init_x_n, initargs=(x,n))
+	stat1 = [0] + pool.map(tsti,range(len1-1))
 	if(max(stat1) > thd):
 		maxstat = max(stat1)
 		pos = where(stat1 == maxstat)[0][0]+1
