@@ -127,17 +127,19 @@ def tst(s0,s1,n=12, k = 3, dtype = 'chebychev'):
 	return stat1/n
 
 ##### single change point detection [6]
-def init_x_n(X,N):
-	global x,n
+def init(X,N,K,DTYPE):
+	global x,n,k,dtype
 	x = X
 	n = N
+	k = K
+	dtype = DTYPE
 
 def tsti(i):
 	s0 = x[0:(i+1),:]
 	s1 = x[(i+2):,:]
-	return tst(s0,s1,n)
+	return tst(s0,s1,n,k,dtype)
 	
-def cpd(x, thd = 0.13, n = 30):
+def cpd(x, thd = 0.13, n = 30, k = 3, dtype = 'chebychev'):
 	x = mat(x)
 	len1 = x.shape[0]
 	if len1 == 1:
@@ -145,15 +147,15 @@ def cpd(x, thd = 0.13, n = 30):
 		x = x.T
 	pos = -1
 	maxstat = 0
-	pool = Pool(initializer = init_x_n, initargs=(x,n))
-	stat1 = [0] + pool.map(tsti,range(len1-1))
+	pool = Pool(initializer = init, initargs=(x,n,k,dtype))
+	stat1 = [0] + pool.map(tsti,range(len1-2))
 	if(max(stat1) > thd):
 		maxstat = max(stat1)
 		pos = where(stat1 == maxstat)[0][0]+1
 	return pos, maxstat, stat1
 
 ##### multiple change point detection [6]
-def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30):
+def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30, k = 3, dtype = 'chebychev'):
 	x = mat(x)
 	len1 = x.shape[0]
 	if len1 == 1:
@@ -165,7 +167,7 @@ def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30):
 	for i in range(0,maxp):
 		if i >= bisegs.shape[0]:
 			break
-		rpos, rmaxstat, _ = cpd(x[bisegs[i,0]:bisegs[i,1],:],thd,n)
+		rpos, rmaxstat, _ = cpd(x[bisegs[i,0]:bisegs[i,1],:],thd,n,k,dtype)
 		if rpos > -1 :
 			rpos = rpos + bisegs[i,0]
 			maxstat.append(rmaxstat)
