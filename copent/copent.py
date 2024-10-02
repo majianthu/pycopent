@@ -33,7 +33,7 @@ from scipy.special import digamma
 from scipy.stats import rankdata as rank 
 from scipy.spatial.distance import cdist
 from math import gamma, log, pi
-from numpy import array, abs, max, hstack, vstack, ones, zeros, cov, mat, where
+from numpy import array, abs, max, hstack, vstack, ones, zeros, cov, matrix, where
 from numpy.random import uniform, normal as rnorm
 from numpy.linalg import det
 from multiprocessing.pool import Pool,ThreadPool
@@ -141,7 +141,7 @@ def tsti(i):
 	return tst(s0,s1,n,k,dtype)
 	
 def cpd(x, thd = 0.13, n = 30, k = 3, dtype = 'chebychev'):
-	x = mat(x)
+	x = matrix(x)
 	len1 = x.shape[0]
 	if len1 == 1:
 		len1 = x.shape[1]
@@ -161,14 +161,14 @@ def cpd(x, thd = 0.13, n = 30, k = 3, dtype = 'chebychev'):
 
 ##### multiple change point detection [6]
 def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30, k = 3, dtype = 'chebychev'):
-	x = mat(x)
+	x = matrix(x)
 	len1 = x.shape[0]
 	if len1 == 1:
 		len1 = x.shape[1]
 		x = x.T
 	maxstat = []
 	pos = []
-	bisegs = mat([0,len1-1])
+	bisegs = matrix([0,len1-1])
 	for i in range(0,maxp):
 		if i >= bisegs.shape[0]:
 			break
