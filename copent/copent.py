@@ -1,6 +1,6 @@
 ##################################################################################
 ###  Estimating Copula Entropy and Transfer Entropy 
-###  2024-05-28
+###  2024-10-02
 ###  by Ma Jian (Email: majian03@gmail.com)
 ###
 ###  Parameters
@@ -36,7 +36,8 @@ from math import gamma, log, pi
 from numpy import array, abs, max, hstack, vstack, ones, zeros, cov, mat, where
 from numpy.random import uniform, normal as rnorm
 from numpy.linalg import det
-from multiprocessing import Pool
+from multiprocessing.pool import Pool,ThreadPool
+import sys
 
 ##### constructing empirical copula density [1]
 def construct_empirical_copula(x):
@@ -147,8 +148,12 @@ def cpd(x, thd = 0.13, n = 30, k = 3, dtype = 'chebychev'):
 		x = x.T
 	pos = -1
 	maxstat = 0
-	pool = Pool(initializer = init, initargs=(x,n,k,dtype))
-	stat1 = [0] + pool.map(tsti,range(len1-2))
+	if sys.platform.startswith("win"): # "win"
+	    pool = ThreadPool(initializer = init, initargs=(x,n,k,dtype))
+	else: # "linux" or "darwin"
+	    pool = Pool(initializer = init, initargs=(x,n,k,dtype))
+	stat1 = [0] + pool.map(tsti,range(len1-2)) + [0]
+	pool.close()
 	if(max(stat1) > thd):
 		maxstat = max(stat1)
 		pos = where(stat1 == maxstat)[0][0]+1
@@ -177,4 +182,3 @@ def mcpd(x, maxp = 5, thd = 0.13, minseglen = 10, n = 30, k = 3, dtype = 'chebyc
 			if (bisegs[i,1] - rpos +1) > minseglen :
 				bisegs = vstack((bisegs,[rpos,bisegs[i,1]]))
 	return pos,maxstat
-
